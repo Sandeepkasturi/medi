@@ -4,9 +4,9 @@ from PIL import Image
 import io
 import cv2
 import numpy as np
-
+from google.generativeai import configure, GenerativeModel
 # Set API Key (replace with your actual API key)
-genai.configure(api_key="AIzaSyA0MDtCJ7v9Dhu83cK1dgcjGxmiH6CxrWg")
+configure(api_key="AIzaSyA0MDtCJ7v9Dhu83cK1dgcjGxmiH6CxrWg")
 
 # Streamlit UI configuration
 st.set_page_config(layout="wide")
@@ -110,7 +110,7 @@ if image and analyze_button:
     img_byte_array = img_byte_array.getvalue()
 
     # Use the generative AI model to generate a diagnosis
-    model = genai.GenerativeModel(model_name)
+    model = GenerativeModel(model_name)
     response = model.generate_content([prompt, {"mime_type": "image/png", "data": img_byte_array}])
     diagnosis = response.text.strip()
 
